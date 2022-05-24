@@ -12,4 +12,8 @@ class Post extends Model
         "content", 
         "image_url"
     ];
+
+    public function categories(){
+        return $this->belongsToMany("App\Model\Category");
+    }
 }

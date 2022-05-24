@@ -10,4 +10,8 @@ class Category extends Model
         "name", 
         "color"
     ];
+
+    public function posts(){
+        return $this->belongsToMany("App\Model\Post");
+    }
 }

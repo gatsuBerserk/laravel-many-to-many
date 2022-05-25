@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Seeder; 
-use Faker\Generator as Faker;
+use Illuminate\Database\Seeder;
 use App\Model\Category;
 use App\Model\Post;
+use Faker\Generator as Faker;
 
-class CategoryPostTableSeeder extends Seeder
+class CategoryPostTableseeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,14 @@ class CategoryPostTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $category_ids = Category::pluck('id')->toArray();
-        $posts = Post::all();
+         // ? Prendo tutti gli id disponibili in categories
+         $category_ids = Category::pluck('id')->toArray();
 
-        foreach ($posts as $post) {
-            $post->categories()->sync($faker->randomElements($category_ids, 1));
-        }
+         // § Prendo tutti gli id disponibili in categories
+         $posts = Post::all();
+ 
+         foreach ($posts as $post) {
+             $post->categories()->sync($faker->randomElements($category_ids, rand(1,5)));
+         }
     }
 }

@@ -11,7 +11,7 @@ class Post extends Model
         "author", 
         "content", 
         "image_url"
-    ];
+    ]; 
 
     public function categories(){
         return $this->belongsToMany("App\Model\Category");

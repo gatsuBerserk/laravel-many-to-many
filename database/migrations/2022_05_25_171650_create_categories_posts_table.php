@@ -16,10 +16,16 @@ class CreateCategoriesPostsTable extends Migration
        
         Schema::create('category_post', function (Blueprint $table) {
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')
+            ->references('id')
+            ->on('posts')
+            ->onDelete("cascade");
 
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories')
+            ->onDelete("cascade");;
         });
     }
 

@@ -15,10 +15,11 @@ class AddRelationUsersToPosts extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger("user_id")->after("id");
+            $table->unsignedBigInteger("user_id")->after("id")->nullable();
             $table->foreign("user_id")
             ->references("id")
-            ->on("users");
+            ->on("users")
+            ->onDelete("set null");
         });
     }
 

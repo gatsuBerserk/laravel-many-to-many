@@ -37,6 +37,7 @@
                     Scritto da: {{$user->name}}
                 </h6>
                 <p class="card-text"><small class="text-muted">Last updated {{$post->created_at}}</small></p>
+                
             </div>
             <div>
                 Altri Articoli scritti da {{$user->name}}:

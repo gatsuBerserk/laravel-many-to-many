@@ -31,7 +31,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("admin.posts.create");
+        $categories= Category::all();
+        return view("admin.posts.create", compact("categories"));
     }
 
     /**
@@ -44,18 +45,21 @@ class PostController extends Controller
     {
         $request->validate([
             "title" => "required|max:100|min:4",
-            "content" => "required|max:250|min:10",
+            "content" => "required|max:500|min:10",
             "image_url" => "required",
         ]);
 
         $data = $request->all();
         $data["user_id"] = Auth::user()->id;
         $data["author"] = Auth::user()->name;
+        
 
         $newPost = new Post(); 
         $newPost->fill($data); 
         $newPost->save();
-
+        
+        $newPost->categories()->attach($data['category']);
+        
         return redirect()->route("admin.posts.index")->with("message", "$newPost->title è stato pubblicato in bacheca");
         
     }
@@ -81,7 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("admin.posts.edit", compact("post"));
+        $categories = Category::all();
+        return view("admin.posts.edit", compact("post", "categories"));
     }
 
     /**
@@ -101,7 +106,9 @@ class PostController extends Controller
         $data= $request->all(); 
         $data["user_id"] = Auth::user()->id;
         $data['author'] = Auth::user()['name'];
-        $post->update($data);
+        $post->update($data); 
+
+        $post->categories()->sync($data['category']);
 
         return redirect()
         ->route('admin.posts.show', $post)

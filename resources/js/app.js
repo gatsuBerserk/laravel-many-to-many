@@ -30,3 +30,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+
+
+const deleteForms = document.querySelectorAll('.delete');
+    deleteForms.forEach(singleForm => {
+        singleForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // § blocchiamo l'invio del form
+            userConfirmation = window.confirm(`Sei sicuro di voler eliminare ${this.getAttribute(' post-title')}?` );
+            if (userConfirmation) {
+                this.submit();
+            }
+        })
+    });

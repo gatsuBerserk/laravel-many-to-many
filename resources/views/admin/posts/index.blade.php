@@ -27,7 +27,6 @@
                     @dump($post->id)
                     @foreach ($post->categories as $category)
                     <p class="badge" style="background-color: {{$category->color}}">{{$category->name }}</p>
-                    @dump($category->id)
                     @endforeach
                     <p class="card-text"><small class="text-muted">Last updated {{$post->created_at}}</small></p>
                     <a class="btn btn-success" href="{{route("admin.posts.show", $post->id)}}">Continua a leggere...</a>
@@ -41,4 +40,3 @@
 </div>
     
 @endsection
-@dump($posts)
